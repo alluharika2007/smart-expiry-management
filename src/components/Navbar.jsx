@@ -29,6 +29,7 @@ export default function Navbar({ onRequestDemo }) {
     { name: 'Our Solution', href: '#solution' },
     { name: 'Features', href: '#features' },
     { name: 'Live Dashboard', href: '#dashboard', highlight: true },
+    { name: 'Store Navigation', href: '#store-navigation', highlight: true },
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Benefits', href: '#benefits' },
     { name: 'Target Stores', href: '#target-customers' },
