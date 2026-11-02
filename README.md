@@ -114,9 +114,11 @@ This project is pre-configured with `vercel.json` for seamless deployment.
 | **Problem We Solve** | `ProblemSection.jsx` | 4 cards analyzing manual checking, customer dissatisfaction, unnoticed near-expiry stock, and food waste, plus a "Traditional vs. SmartExpiry" comparison. |
 | **Our Solution** | `SolutionWorkflow.jsx` | 6-stage visual lifecycle: Inwarding → Digitization → Tracking → Alerts → Dynamic Markdown → Shelf Action. |
 | **Key Features** | `FeaturesSection.jsx` | 8 capability cards with honest badges distinguishing live demo features from roadmap capabilities. |
-| **Live Supermarket Dashboard** | `InteractiveDashboard.jsx` | Fully functional demo with realistic Indian supermarket SKUs (Amul, Britannia, Mother Dairy, Aashirvaad), real-time search, category filters, status filters, discount triggers, and CSV export. |
-| **AI Strategy Tester** | `DynamicDiscountSimulator.jsx` | Real-time interactive slider demonstrating how the dynamic markdown curve balances shelf life against retail margin. |
-| **Barcode Simulator** | Integrated in Dashboard | Optical EAN-13 scanning simulation modal with laser animation and preset retail barcodes. |
+| **Live Supermarket Dashboard** | `InteractiveDashboard.jsx` | Fully functional demo with realistic Indian supermarket SKUs, physical shelf codes, aisle filters, branch selector, real-time search, discount triggers, and CSV export. |
+| **QR & Barcode Camera Scanner** | `CameraBarcodeScannerModal.jsx` | Camera-based scanner using `html5-qrcode` to scan product packages, fallback manual entry, quick test codes, unknown code error handling, and direct "Navigate to Product" trigger. |
+| **Smart Indoor Floor Navigation** | `StoreMapNavigation.jsx` | Interactive SVG supermarket floor plan with BFS/Dijkstra shortest path calculation, turn-by-turn directions, walking distance & time estimation, and multi-product clearance route planning. |
+| **Product Location Tracking** | `EditLocationModal.jsx` | Authorized staff tool to record and update branch, department, aisle, rack, shelf number, and shelf level with dynamic shelf codes. |
+| **AI Strategy Tester** | `DynamicDiscountSimulator.jsx` | Real-time interactive slider demonstrating how the dynamic markdown curve balances shelf life against retail margin (never selling expired goods). |
 | **How It Works** | `HowItWorks.jsx` | Clean 3-step process flow with step diagram connectors. |
 | **Benefits for Retailers** | `BenefitsSection.jsx` | 6 grounded operational benefits without fabricated claims or false statistics. |
 | **Target Customers** | `TargetCustomers.jsx` | Focused breakdown for Tier-2 & Tier-3 retail (Kirana stores, Standalone Supermarkets, Regional Chains). |
@@ -125,14 +127,21 @@ This project is pre-configured with `vercel.json` for seamless deployment.
 
 ---
 
+## 🧭 Indoor Positioning vs Outdoor GPS (Technical Transparency)
+
+- **Indoor Positioning Reality**: Satellite GPS signals cannot reliably penetrate concrete supermarket ceilings. In this initial prototype, starting positions (Main Entrance, Billing Counter, Customer Service Desk, or specific Aisles) are chosen manually by the user or staff. Automated sub-meter indoor positioning in production requires ceiling-mounted **BLE Beacons (Bluetooth Low Energy)** or **Wi-Fi RTT (802.11mc)** hardware.
+- **Outdoor GPS**: An optional outdoor GPS module is provided with user browser permission to locate the user relative to the supermarket branch and provide driving/walking directions via Google Maps.
+
+---
+
 ## 🎓 Entrepreneurship Project Presentation Guide
 
 When presenting to faculty, mentors, or potential retail pilot partners:
-1. **Start with the Problem**: Highlight that Tier-2/3 Indian supermarkets lose 2-4% of turnover to unnoticed expired goods because staff spend hours with paper clipboards.
-2. **Demonstrate the Live Dashboard**: 
-   - Search for "Amul" or "Bread" to show instant filtering.
-   - Click "Expiring Soon" to see items that require immediate action.
-   - Click **"Apply Discount"** on Britannia Bread to show how it triggers POS clearance.
-   - Click **"Simulate Barcode Scan"** to show how easy it is for a store clerk to identify an item.
-3. **Showcase the Dynamic Markdown Curve Tester**: Move the slider between 15 days and -1 day to explain the economics of salvaging 50%-80% of unit cost rather than dumping expired stock.
-4. **Highlight Ground Realities**: Emphasize that SmartExpiry requires zero hardware lock-in and takes less than 5 minutes of staff training.
+1. **Camera & QR/Barcode Scanning**: Click **"Camera Barcode / QR Scanner"**, demonstrate the optical viewfinder, click a sample product code (e.g., Amul Milk or Britannia Bread), view its instant retrieved record, and click **"Navigate to Product on Store Map"**.
+2. **Interactive Floor Map & Dijkstra Routing**:
+   - Show the highlighted green route on the floor map.
+   - Change your starting point from "Main Entrance" to "Billing Counter #1" or "Chiller Zone" and watch the route recalculate instantly.
+   - Point out the calibrated map scale (*1 Grid Cell = 1.5 meters*), walking distance in meters, and estimated time.
+3. **Multi-Product Clearance Run**: Toggle to **"Multi-Product Clearance Run"** to show how floor staff can generate an optimized multi-stop collection route to pull near-expiry items across different aisles in a single efficient run.
+4. **Physical Shelf Location Management**: Click **"Edit Location"** on any product to demonstrate how authorized staff can change aisles, racks, and shelf levels with automatically generated shelf codes (e.g. `CZ-B1-S2`, `A1-RA-S2`).
+5. **Safety Compliance**: Show that expired items (e.g. Mother Dairy Paneer) are strictly locked from sale with clear "DO NOT SELL" instructions, safeguarding customer safety.
